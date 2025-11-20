@@ -29,7 +29,7 @@ framework:
     # Enable or disable device log support
     deviceLog: true
     # App ID to be installed (mandatory field, using <app_id>)
-    appId: lt://APP10160381611749039181933184
+    appId: lt://<app_id>
     # Build name for identification on the automation dashboard
     buildName: maestro-t1
     # Timeout for device queue

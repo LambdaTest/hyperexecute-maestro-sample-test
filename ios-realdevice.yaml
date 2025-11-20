@@ -9,10 +9,6 @@ autosplit: true
 # Set the concurrency level for test execution (3 devices in parallel)
 concurrency: 3
 
-runtime:
-  - language: java
-    version: "21"
-
 # Enable dynamic allocation of resources
 dynamicAllocation: true
 
@@ -45,7 +41,7 @@ framework:
     # Enable or disable device log support
     deviceLog: true
     # App ID to be installed (mandatory field, using new iOS sample app)
-    appId: NewiOSSampleApp
+    appId: lt://<app_id>
     # Build name for identification on the automation dashboard
     buildName: RD-maestro
     # Timeout for device queue

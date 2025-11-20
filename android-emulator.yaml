@@ -10,6 +10,10 @@ concurrency: 2
 # Specify the target platform for test execution (Android in this case)
 runson: android
 
+runtime:
+  - language: java
+    version: "21"
+
 # Enable dynamic allocation of resources
 dynamicAllocation: true
 
@@ -19,13 +23,13 @@ framework:
   name: raw
   args:
     # List of devices to run tests on (Pixel 8 to 14 devices in this case)
-    devices: ["Pixel 8-14"]
+    devices: [".*-.*", ".*-.*", ".*-.*"]
     # Enable or disable video recording support
     video: true
     # Enable or disable device log support
     deviceLog: true
     # App ID to be installed (mandatory field, using <app_id>)
-    appId: lt://APP10160381611749039181933184
+    appId: lt://<app_id>
     # Build name for identification on the automation dashboard
     buildName: maestro-t1
     # Timeout for device queue

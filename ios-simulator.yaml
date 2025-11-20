@@ -19,13 +19,13 @@ framework:
   name: raw
   args:
     # List of devices to run tests on (two Pixel 5 devices in this case)
-    devices: ["iphone 14-16"]
+    devices: [".*-.*", ".*-.*", ".*-.*"]
     # Enable or disable video recording support
     video: true
     # Enable or disable device log support
     deviceLog: true
     # App ID to be installed (mandatory field, using <app_id>)
-    appId: lt://iOS_APP_ID   #Need to upload .zip file
+    appId: lt://<app_id>  #Need to upload .zip file
     # Build name for identification on the automation dashboard
     buildName: maestro-t1
     # Timeout for device queue
