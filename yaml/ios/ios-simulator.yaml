@@ -7,12 +7,8 @@ autosplit: true
 # Set the concurrency level for test execution (2 devices in parallel)
 concurrency: 2
 
-# Specify the target platform for test execution (Android in this case)
-runson: android
-
-runtime:
-  - language: java
-    version: "21"
+# Specify the target platform for test execution (iOS in this case)
+runson: ios
 
 # Enable dynamic allocation of resources
 dynamicAllocation: true
@@ -22,14 +18,14 @@ framework:
   # Name of the test framework (raw in this case)
   name: raw
   args:
-    # List of devices to run tests on (Pixel 8 to 14 devices in this case)
+    # List of devices to run tests on (two Pixel 5 devices in this case)
     devices: [".*-.*", ".*-.*", ".*-.*"]
     # Enable or disable video recording support
     video: true
     # Enable or disable device log support
     deviceLog: true
     # App ID to be installed (mandatory field, using <app_id>)
-    appId: lt://<app_id>
+    appId: lt://<app_id> #Need to upload .zip file
     # Build name for identification on the automation dashboard
     buildName: maestro-t1
     # Timeout for device queue
@@ -40,7 +36,7 @@ framework:
     reservation: false
     isRealMobile: false
     network: true
-    platformName: android
+    platformName: ios
 
 env:
   MAESTRO: true
@@ -49,22 +45,22 @@ env:
 # Pre-install required dependencies using pip
 # will need java and maestro inside the container
 pre:
-  - chmod +x ./maestro-test/setup-script.sh
-  - chmod +x ./maestro-test/runTest_android_emulator.sh
-  - ./maestro-test/setup-script.sh
+  - chmod +x maestro-test/setup-script-iOS.sh
+  - chmod +x ./maestro-test/runTest_ios.sh
+  - ./maestro-test/setup-script-iOS.sh
 
 # Test discovery configuration
 testDiscovery:
   # Command to discover tests from the test.txt file
-  command: cat ./maestro-test/discover.txt
+  command: cat ./maestro-test/discover-iOS.txt
   # Test discovery mode can be static/dynamic
   mode: static
   # Test type is raw (custom test implementation)
   type: raw
 
 # Command to run the tests using the testRunnerCommand
-testRunnerCommand: ./maestro-test/runTest_android_emulator.sh $test 
-
+testRunnerCommand: ./maestro-test/runTest_ios.sh $test 
+    
 # Only report the status of the test framework
 frameworkStatusOnly: true
 
@@ -74,5 +70,4 @@ partialReports:
     type: xml
     frameworkName: junit
 
-
-jobLabel: ['HYP', 'Maestro', 'Android', 'Emulator']
+jobLabel: ['HYP', 'Maestro', 'iOS', Simulator]
