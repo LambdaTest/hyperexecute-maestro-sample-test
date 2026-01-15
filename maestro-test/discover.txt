@@ -1,2 +1,2 @@
-android-swipe1.yaml
-android-launch.yaml
+yaml/android/android-swipe1.yaml
+yaml/android/android-launch.yaml

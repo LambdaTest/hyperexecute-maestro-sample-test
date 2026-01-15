@@ -41,7 +41,7 @@ framework:
     # Enable or disable device log support
     deviceLog: true
     # App ID to be installed (mandatory field, using new iOS sample app)
-    appId: lt://<app_id>
+    appPath: maestro-test/Proverbial_ios.ipa
     # Build name for identification on the automation dashboard
     buildName: RD-maestro
     # Timeout for device queue

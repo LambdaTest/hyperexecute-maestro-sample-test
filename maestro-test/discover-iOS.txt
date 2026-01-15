@@ -1,2 +1,2 @@
-simple_test_ios_rd.yaml
-simple_test_ios_rd2.yaml
+yaml/ios/simple_test_ios_rd.yaml
+yaml/ios/simple_test_ios_rd2.yaml
