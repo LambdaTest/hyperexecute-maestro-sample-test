@@ -1,93 +1,116 @@
-# LT Maestro Framework sample test — TestMu AI (Formerly LambdaTest)
+# Run Maestro Tests with HyperExecute on TestMu AI (Formerly LambdaTest)
 
-Support for directly running Maestro Tests on the device at TestMu AI using Hyperexecute and RealDevice
+<p align="center">
+  <a href="https://www.testmuai.com/"><img src="https://img.shields.io/badge/MADE%20BY%20TestMu%20AI-000000.svg?style=for-the-badge&labelColor=000" alt="Made by TestMu AI"></a>
+  <a href="https://github.com/mobile-dev-inc/maestro"><img src="https://img.shields.io/github/v/release/mobile-dev-inc/maestro.svg?style=for-the-badge&labelColor=000000" alt="Maestro version"></a>
+  <a href="https://community.testmuai.com/"><img src="https://img.shields.io/badge/Join%20the%20community-blueviolet.svg?style=for-the-badge&labelColor=000000" alt="Community"></a>
+</p>
 
-## Steps to launch test
-1. Install hyperexecute cli from `Help` option on [hyperexecute](https://hyperexecute.lambdatest.com/hyperexecute/jobs) dashboard by going to Help -> Hyperexecute CLI
+## Getting Started
 
-2. Move hyperexecute cli binary in the root directory of the repository.
+[TestMu AI](https://www.testmuai.com/) (Formerly LambdaTest) is the world's first full-stack AI Agentic Quality Engineering platform that empowers teams to test intelligently, smarter, and ship faster. Built for scale, it offers a full-stack testing cloud with 10K+ real devices and 3,000+ browsers. With AI-native test management, MCP servers, and agent-based automation, TestMu AI supports Selenium, Appium, Playwright, and all major frameworks. 
 
-3. To make cli executable run this: `chmod u+x ./hyperexecute`
+With TestMu AI (Formerly LambdaTest), you can run Maestro mobile tests on real devices and emulators using HyperExecute. This sample shows how to configure Maestro + HyperExecute to run on the TestMu AI cloud.
 
-4. From LT hyperexecute dashborad get your `USERNAME` and `ACCESS_KEY`
+- [Sign up on TestMu AI](https://www.testmuai.com/register/) (Formerly LambdaTest).
+- Follow the [TestMu AI Documentation](https://www.testmuai.com/support/docs/) for the full setup walkthrough.
 
-5. You can either upload the app through the dashboard mentioned below in Android and iOS or use this curl to upload app  and for getting the app_id for passing it in the script -
-curl -u "<username>:<accessKey>" -X POST "https://manual-api.lambdatest.com/app/upload/realDevice" -F "appFile=@"<local_app_path>"" -F "name="sampleApp""
+### Prerequisites
 
-6. To start the test  `./hyperexecute --user <USERNAME> --key <ACCESS_KEY> --config yaml/maestro.yaml`
+- A [TestMu AI](https://www.testmuai.com/) account with your username and access key
+- [HyperExecute CLI](https://www.testmuai.com/support/docs/hyperexecute-cli-run-tests-on-hyperexecute-grid/) binary for your OS
+- App uploaded to TestMu AI (`.apk` for Android or `.ipa`/`.zip` for iOS)
 
-7. For iOS real devices, install the following JAR file and include it in your payload. https://prod-mobile-artefacts.lambdatest.com/assets/maestro-cli/1.41.0-beta-1/maestro.jar
+### Setup
 
+Clone and install dependencies:
 
-## Android 
+```bash
+git clone https://github.com/LambdaTest/hyperexecute-maestro-sample-test && cd hyperexecute-maestro-sample-test
+chmod +x ./hyperexecute
+```
 
-### Real Device
+Set your credentials as environment variables.
 
-- You can use the `android-realdevice.yaml` to run test on android real device present in the yaml/android folder.
+**macOS / Linux:**
 
-- `setup-script.sh` and `runTest.sh` present in the maestro-test folder are required to run test cases on android real device.
+```bash
+export LT_USERNAME="YOUR_USERNAME"
+export LT_ACCESS_KEY="YOUR_ACCESS_KEY"
+export LT_TUNNEL="YOUR_TUNNEL_NAME"
+```
 
-- You can also replace the `<app_id>` with your app id which you can get by upload the app to [real device dashboard](https://applive.lambdatest.com/app). You can use the `sample.apk` for testing present in the maestro-test folder.
+**Windows:**
 
+```bash
+set LT_USERNAME="YOUR_USERNAME"
+set LT_ACCESS_KEY="YOUR_ACCESS_KEY"
+set LT_TUNNEL="YOUR_TUNNEL_NAME"
+```
 
-### Emulator
+### Run tests
 
-- You can use the `android-emulator.yaml` to run test on android real device present in the yaml/android folder.
+For Android real device:
 
-- `setup-script.sh` and `runTest_android_emulator.sh` present in the maestro-test folder are required to run test cases on android emulators.
+```bash
+./hyperexecute --user YOUR_USERNAME --key YOUR_ACCESS_KEY --config yaml/maestro.yaml
+```
 
-- You can also replace the `<app_id>` with your app id which you can get by upload the app to [real time dashboard](https://app.lambdatest.com/console/realtime/app). You can use the `sample.apk` for testing present in the maestro-test folder.
+View results on your TestMu AI dashboard.
 
+### Local testing with TestMu AI Tunnel
 
+To test locally hosted apps, set up the TestMu AI tunnel. OS-specific guides:
 
-## iOS
+- [Local Testing on Windows](https://www.testmuai.com/support/docs/local-testing-for-windows/)
+- [Local Testing on macOS](https://www.testmuai.com/support/docs/local-testing-for-macos/)
+- [Local Testing on Linux](https://www.testmuai.com/support/docs/local-testing-for-linux/)
 
-### Real Device
+Add the following to your capabilities:
 
-- You can use the `ios-realdevice.yaml` to run test on android real device present in the yaml/ios folder.
+```js
+tunnel: true,
+```
 
-- `runTest_ios_realdevice.sh` present in the maestro-test folder is only required to run test cases in iOS real device
+## Contributions
 
-- You can also replace the `<app_id>` with your app id which you can get by upload the app to [real device dashboard](https://applive.lambdatest.com/app). You can use the `Proverbial_ios.ipa` for testing present in the maestro-test folder.
+Contributions are welcome. Open an issue to discuss your idea before submitting a pull request. When reporting bugs, include your Maestro version, OS, and HyperExecute CLI version.
 
+## TestMu AI (Formerly LambdaTest) Community
 
-### Simulator
+Connect with testers and developers in the [TestMu AI Community](https://community.testmuai.com/). Ask questions, share what you are building, and discuss best practices in test automation and DevOps.
+  
+## TestMu AI (Formerly LambdaTest) Certifications
 
-- You can use the `ios-simulator.yaml` to run test on android real device present in the yaml/ios folder.
+Earn free [TestMu AI Certifications](https://www.testmuai.com/certifications/) for testers, developers, and QA engineers. Validate your skills in Selenium, Cypress, Playwright, Appium, Espresso and more. Industry-recognized, shareable on LinkedIn, and built by practitioners, not marketers.
 
-- `setup-script-iOS.sh` and `runTest_ios.sh` present in the maestro-test folder are required to run test cases of 
+## Learning Resources by TestMu AI (Formerly LambdaTest)
 
-- You can also replace the `<app_id>` with your app id which you can get by upload the app to [real time dashboard](https://app.lambdatest.com/console/realtime/app). You can use the `Proverbial_ios.zip` for testing present in the maestro-test folder.
+Learn modern testing through tutorials, guides, videos, and weekly updates:
 
-#### Note
+* [TestMu AI Blog](https://www.testmuai.com/blog/)
+* [TestMu AI Learning Hub](https://www.testmuai.com/learning-hub/)
+* [TestMu AI on YouTube](https://www.youtube.com/@TestMuAI)
+* [TestMu AI Newsletter](https://www.testmuai.com/newsletter/)
+  
+## LambdaTest is Now TestMu AI
 
-- Incase of iOS simulators we need .zip of the app and in case of real device we upload the .ipa.
+On **January 12, 2026**, [LambdaTest evolved to TestMu AI](https://www.testmuai.com/lambdatest-is-now-testmuai/), the world's first fully autonomous **Agentic AI Quality Engineering Platform**.
 
-## 🚀 LambdaTest is Now TestMu AI
+Same team. Same infrastructure. Same customer accounts. All existing LambdaTest logins, scripts, capabilities, and integrations continue to work without change.
 
-👋 Welcome to TestMu AI, the next evolution of LambdaTest. As of January 2026, [LambdaTest is Now TestMu AI](https://www.testmuai.com/lambdatest-is-now-testmuai/) - we have evolved from a cross-browser testing cloud into a unified, AI-native quality engineering platform designed for the modern DevOps era.
+Find the new home for [LambdaTest](https://www.testmuai.com).
 
-Whether you have been part of the LambdaTest community for years or are just discovering TestMu AI, our mission remains the same: to help you ship faster with high-scale test execution, autonomous testing, and deep quality analytics.
+### How LambdaTest Evolved into TestMu AI
 
-### 🔄 Our Rebrand Journey
+In 2017, we launched LambdaTest with a simple mission: make testing fast, reliable, and accessible. As LambdaTest grew, we expanded into Test Intelligence, Visual Regression Testing, Accessibility Testing, API Testing, and Performance Testing, covering the full depth of the testing lifecycle.
 
-In 2017, we introduced LambdaTest with a clear mission: to become the world's most trusted cloud testing platform. We built a scalable, high-performance test cloud that eliminated flakiness, improved developer feedback cycles, and accelerated release velocity for teams worldwide.
+As software development entered the AI era, testing had to evolve, too. We rebuilt the architecture to be AI-native from the ground up, with autonomous agents that **plan, author, execute, analyze, and optimize tests** while keeping humans in the loop. The platform integrates with your repos, CI, IDEs, and terminals, continuously learning from every code change and development signal.
 
-As LambdaTest grew, we expanded the platform into Test Intelligence, Visual Regression Testing, Accessibility Testing, API Testing, and Performance Testing, covering the entire testing lifecycle. These capabilities enabled teams to test any stack, on any technology, at enterprise scale.
+That evolution earned a new name: **TestMu AI**, built for an AI-first future of quality engineering. TestMu is not a new name for us. It is the name of our annual community conference, which has brought together 100,000+ quality engineers to discuss how AI would reshape testing, long before that became an industry norm. 
 
-Over time, we rebuilt the architecture to be AI-native from the ground up. What began as LambdaTest's high-performance testing cloud has now evolved into TestMu AI, an AI-native, multi-agent platform redefining modern quality engineering.
+What started as a high-performance cloud testing platform has transformed into an AI-native, multi-agent system powering a connected, end-to-end quality layer. That evolution defined a new identity: LambdaTest evolved into TestMu AI, built for an AI-first future of quality engineering.
 
-We chose the name TestMu AI to reflect our shift towards intelligent, autonomous testing. While our identity has changed, our core technology and commitment to the testing community stay the same.
+## Support
 
-👉 Find [LambdaTest's New Home](https://www.testmuai.com/).
-
-### 🔭 Explore TestMu AI
-
-The same infrastructure LambdaTest customers relied on, now delivered through autonomous AI agents.
-
-- [KaneAI](https://www.testmuai.com/kane-ai/)
-- [Agent-to-Agent Testing](https://www.testmuai.com/agent-to-agent-testing/)
-- [HyperExecute](https://www.testmuai.com/hyperexecute/)
-- [Real Device Cloud](https://www.testmuai.com/real-device-cloud/)
-- [Pricing](https://www.testmuai.com/pricing/)
-- [Documentation](https://www.testmuai.com/support/docs/)
+Got a question? Email [support@testmuai.com](mailto:support@testmuai.com) or chat with us 24x7 from our chat portal.
