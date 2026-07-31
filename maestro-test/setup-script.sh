@@ -19,6 +19,8 @@ sudo cp -r /usr/local/android-sdk/platform-tools /usr/lib/android-sdk/
 # Can update the maestro version as required
 mkdir -p ~/maestro-dir
 cd ~/maestro-dir
+# Pinned to Maestro 2.6.1. For a higher version, connect with support@testmuai.com
+export MAESTRO_VERSION=2.6.1
 curl -Ls "https://get.maestro.mobile.dev" | bash
 sleep 5
 export PATH="$PATH":"$HOME/.maestro/bin"
