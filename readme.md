@@ -58,6 +58,11 @@ For Android real device:
 
 View results on your TestMu AI dashboard.
 
+### Testing in multiple languages
+
+Run your app in several languages on iOS simulators without changing the device
+language — see [LANGUAGE_TESTING.md](LANGUAGE_TESTING.md).
+
 ### Local testing with TestMu AI Tunnel
 
 To test locally hosted apps, set up the TestMu AI tunnel. OS-specific guides:

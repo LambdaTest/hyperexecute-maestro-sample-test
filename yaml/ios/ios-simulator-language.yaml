@@ -1,0 +1,90 @@
+# HyperExecute job config for running the app in multiple languages on iOS simulators.
+#
+# The language is set inside each Maestro flow via launchApp arguments, so nothing
+# special is needed here - the simulator's own language is never changed.
+
+# Define the version of the configuration file
+version: "0.2"
+
+# Enable autosplit for test execution
+autosplit: true
+
+# One device, so the language flows run back to back. They are order-independent,
+# and each flow asserts the other languages are absent to prove it.
+concurrency: 1
+
+# Specify the target platform for test execution (iOS in this case)
+runson: ios
+
+# Enable dynamic allocation of resources
+dynamicAllocation: true
+
+# Test framework configuration
+framework:
+  # Name of the test framework (raw in this case)
+  name: raw
+  args:
+    # Run on any available simulator
+    devices: [".*"]
+    # Enable or disable video recording support
+    video: true
+    # Enable or disable device log support
+    deviceLog: true
+    # App ID to be installed. Upload maestro-test/sample.zip (the Wikipedia app,
+    # which ships 200+ localizations) and paste the returned id here.
+    # App ids are per-account - an id from someone else will not resolve.
+    appId: lt://<app_id>
+    # Build name for identification on the automation dashboard
+    buildName: maestro-ios-language
+    # Timeout for device queue
+    queueTimeout: 600
+    # Configuration fields specific to running raw tests
+    region: ap
+    disableReleaseDevice: true
+    reservation: false
+    isRealMobile: false
+    network: true
+    platformName: ios
+
+env:
+  MAESTRO: true
+  MAESTRO_LOGS_DIR: MaestroLogs
+
+# Install Maestro on the runner before the tests execute
+pre:
+  - chmod +x maestro-test/setup-script-iOS.sh
+  - chmod +x ./maestro-test/runTest_ios.sh
+  - ./maestro-test/setup-script-iOS.sh
+
+# Test discovery configuration
+testDiscovery:
+  # One language flow per line
+  command: cat ./maestro-test/discover-iOS-lang.txt
+  # Test discovery mode can be static/dynamic
+  mode: static
+  # Test type is raw (custom test implementation)
+  type: raw
+
+# Command to run the tests using the testRunnerCommand
+testRunnerCommand: ./maestro-test/runTest_ios.sh $test
+
+# Only report the status of the test framework
+frameworkStatusOnly: true
+
+report: true
+partialReports:
+  - location: .
+    type: xml
+    frameworkName: junit
+
+# Screenshots are the evidence that the language actually changed. Without this
+# block they stay on the runner and never come back with the job.
+uploadArtefacts:
+  - name: language-screenshots
+    path:
+      - screenshots/**
+  - name: MaestroLogs
+    path:
+      - MaestroLogs/**
+
+jobLabel: ['HYP', 'Maestro', 'iOS', 'Simulator', 'Language']
