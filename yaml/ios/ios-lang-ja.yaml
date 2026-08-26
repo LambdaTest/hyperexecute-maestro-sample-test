@@ -1,0 +1,38 @@
+# Language test flow - runs the app in "ja" without changing the simulator's language.
+#
+# The language is requested per launch through launchApp arguments. iOS reads
+# -AppleLanguages / -AppleLocale at process start, which is the same mechanism
+# Xcode's scheme setting "Application Language" uses. Because the device itself is
+# never modified, these flows are order-independent and safe on a shared device.
+appId: org.wikimedia.wikipedia
+---
+- launchApp:
+    appId: org.wikimedia.wikipedia
+    clearState: true
+    clearKeychain: true
+    arguments:
+      AppleLanguages: "(ja)"
+      AppleLocale: "ja_JP"
+
+# Walk the onboarding with language-independent steps so the same flow works for
+# every language.
+- repeat:
+    times: 3
+    commands:
+      - swipe:
+          direction: LEFT
+          duration: 400
+      - waitForAnimationToEnd
+
+- takeScreenshot:
+    path: "screenshots/wikipedia-ja.png"
+
+# Assert this language IS shown, and that the other languages are NOT. The negative
+# assertions catch a stale app process or leaked state, which would otherwise let the
+# test pass without the language having changed.
+- assertVisible:
+    text: "次へ"
+- assertNotVisible:
+    text: "Get started"
+- assertNotVisible:
+    text: "Démarrer"

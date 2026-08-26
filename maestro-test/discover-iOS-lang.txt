@@ -1,0 +1,3 @@
+yaml/ios/ios-lang-en.yaml
+yaml/ios/ios-lang-fr.yaml
+yaml/ios/ios-lang-ja.yaml
